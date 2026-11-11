@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matemática serve pra quê? – 3º ano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --paper:#F6F9FC; --ink:#14213D; --muted:#4B5B73; --card:#FFFFFF; --line:#CBD8E6;
+  --grid:rgba(40,90,160,.10); --teal:#0E7C86; --teal-ink:#FFFFFF; --soft:#E6F2F4;
+  --hl:#FFD23F; --hl-ink:#1B1B1B; --ok:#157347; --bad:#B42318;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1B2A; --ink:#E8EEF5; --muted:#A9B9CD; --card:#14263A; --line:#2A4058;
+    --grid:rgba(120,170,230,.09); --teal:#4FD1C5; --teal-ink:#06222A; --soft:#12303A;
+    --ok:#5BD08A; --bad:#FF8A80; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1B2A; --ink:#E8EEF5; --muted:#A9B9CD; --card:#14263A; --line:#2A4058;
+  --grid:rgba(120,170,230,.09); --teal:#4FD1C5; --teal-ink:#06222A; --soft:#12303A;
+  --ok:#5BD08A; --bad:#FF8A80; color-scheme:dark;
+}
+html{height:100%;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; min-height:100%; font-family:var(--body); font-size:1.0625rem; line-height:1.6;
+  color:var(--ink); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:20}
+.nav{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:15;
+  background:color-mix(in srgb,var(--paper) 92%,transparent); backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:960px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:thin}
+.nav button{
+  flex:0 0 auto;font:inherit;font-weight:700;font-size:.95rem;color:var(--ink);background:transparent;
+  border:1px solid var(--line);border-radius:999px;padding:.35rem .9rem;cursor:pointer;min-height:40px;
+}
+.nav button:hover{background:var(--soft)}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1rem 4rem}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0}
+h1{font-size:clamp(2.4rem,8vw,4.4rem);font-weight:800;letter-spacing:-.02em;max-width:14ch}
+h2{font-size:clamp(1.6rem,4.5vw,2.3rem);font-weight:700;margin-bottom:.4rem}
+h3{font-size:1.25rem;font-weight:700;margin-bottom:.35rem}
+p{margin:.4rem 0 .8rem;max-width:68ch}
+section{margin-top:3.2rem}
+.lead{font-size:1.2rem;color:var(--muted);max-width:56ch}
+.who{margin:0 0 1.2rem;color:var(--muted);font-size:1.05rem;border-left:5px solid var(--teal);padding-left:.8rem}
+.who b{color:var(--ink)}
+.aviso{
+  margin-top:1.6rem;background:var(--hl);color:var(--hl-ink);border-radius:14px;padding:1.1rem 1.2rem 1.2rem;
+  border:2px solid var(--hl-ink);box-shadow:5px 5px 0 var(--hl-ink);
+}
+.aviso h2{font-size:1.5rem;color:var(--hl-ink)}
+.aviso p{color:var(--hl-ink);margin:.3rem 0 .9rem}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.55rem 1.1rem;
+  font:inherit;font-weight:700;text-decoration:none;border-radius:10px;cursor:pointer;border:2px solid transparent;
+  background:var(--teal);color:var(--teal-ink);
+}
+.btn:hover{filter:brightness(1.08)}
+.aviso .btn{background:var(--hl-ink);color:#FFFFFF;border-color:var(--hl-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:var(--soft)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.card p:last-child{margin-bottom:0}
+.work{font-variant-numeric:tabular-nums;background:var(--soft);border-radius:8px;padding:.6rem .8rem;margin:.5rem 0 0;font-size:.98rem;line-height:1.55}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin-top:1rem}
+.fields{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:.7rem 0 1rem}
+label{display:block;font-weight:700;font-size:.95rem}
+input[type=text]{
+  width:100%;margin-top:.25rem;font:inherit;font-size:1.05rem;padding:.55rem .7rem;min-height:46px;color:var(--ink);
+  background:var(--paper);border:2px solid var(--line);border-radius:8px;
+}
+input[type=text]:focus{border-color:var(--teal)}
+.result{border-left:5px solid var(--teal);background:var(--soft);padding:.7rem .9rem;border-radius:0 8px 8px 0;min-height:3.2rem}
+.result b{font-variant-numeric:tabular-nums}
+.error{color:var(--bad);font-weight:700}
+.fact{display:flex;flex-direction:column;gap:.2rem}
+.fact small{color:var(--muted)}
+.check{list-style:none;padding:0;margin:.8rem 0 0;display:grid;gap:.5rem}
+.check li label{display:flex;gap:.7rem;align-items:flex-start;font-weight:400;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:.15rem;accent-color:var(--teal);flex:0 0 auto}
+.check li label:has(input:checked){background:var(--soft);border-color:var(--teal)}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:.8rem}
+.bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.q{margin-top:1rem}
+.opts{display:grid;gap:.5rem;margin-top:.6rem}
+.opt{
+  text-align:left;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);
+  border-radius:10px;padding:.65rem .85rem;min-height:46px;cursor:pointer;
+}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.why{margin-top:.6rem}
+footer{margin-top:3.5rem;padding-top:1.4rem;border-top:2px solid var(--ink);color:var(--muted)}
+footer b{color:var(--ink)}
+.src{font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Seções">
+  <div class="nav-in">
+    <button data-go="importa">Para que serve</button>
+    <button data-go="simuladores">Faça as contas</button>
+    <button data-go="atualidades">Atualidades</button>
+    <button data-go="estudo">Como estudar</button>
+    <button data-go="videos">Vídeos</button>
+    <button data-go="quiz">Teste rápido</button>
+  </div>
+</nav>
+
+<main>
+  <header>
+    <p class="who"><b style="font-size:1.3rem;font-family:var(--display)">Professor Thiago, de Matemática</b><br>E.E. Moacyr Amaral<br>3º ano do Ensino Médio, Orientação de Estudos</p>
+    <h1>Matemática serve pra quê?</h1>
+    <p class="lead">Para decidir melhor com o seu dinheiro, entender o mundo do trabalho e não ser enganado por número bonito. Aqui você vê como, faz as contas e descobre como estudar.</p>
+    
+
+    <div class="aviso" role="note">
+      <h2>Aviso importante</h2>
+      <p>Faça a <b>Khan Academy</b> e a <b>tarefa</b>. As duas valem para a <b>média do 4º bimestre</b>.</p>
+      <div class="btns">
+        <a class="btn" href="https://pt.khanacademy.org/" target="_blank" rel="noopener">Abrir a Khan Academy</a>
+        <a class="btn" href="https://saladofuturo.educacao.sp.gov.br/" target="_blank" rel="noopener">Abrir a Sala do Futuro</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="importa">
+    <h2>Para que serve, na prática</h2>
+    <p>Matemática não é só conta de prova. Veja onde ela decide coisas reais.</p>
+
+    <h3 style="margin-top:1.4rem">Na vida pessoal</h3>
+    <div class="grid">
+      <article class="card">
+        <h3>Pagar à vista ou parcelar?</h3>
+        <p>Um celular custa R$ 1.200 à vista ou 10 parcelas de R$ 150.</p>
+        <p class="work">10 × 150 = R$ 1.500<br>1.500 − 1.200 = R$ 300<br>300 ÷ 1.200 = 0,25 = <b>25% a mais</b></p>
+      </article>
+      <article class="card">
+        <h3>Quanto sobra do salário?</h3>
+        <p>Ganhou R$ 1.800 e gastou R$ 1.350.</p>
+        <p class="work">1.800 − 1.350 = R$ 450<br>450 ÷ 1.800 = 0,25 = <b>sobrou 25%</b></p>
+      </article>
+      <article class="card">
+        <h3>Desconto de verdade</h3>
+        <p>Uma camisa de R$ 80 com 25% de desconto.</p>
+        <p class="work">25% de 80 = 0,25 × 80 = 20<br>80 − 20 = <b>R$ 60</b></p>
+      </article>
+    </div>
+
+    <h3 style="margin-top:1.8rem">No trabalho</h3>
+    <div class="grid">
+      <article class="card">
+        <h3>Obra e construção</h3>
+        <p>Sala de 4 m por 5 m. Cada caixa de piso cobre 2 m².</p>
+        <p class="work">4 × 5 = 20 m²<br>20 ÷ 2 = <b>10 caixas</b></p>
+      </article>
+      <article class="card">
+        <h3>Transporte e entregas</h3>
+        <p>O carro faz 12 km por litro e a rota tem 60 km.</p>
+        <p class="work">60 ÷ 12 = <b>5 litros</b></p>
+      </article>
+      <article class="card">
+        <h3>Saúde</h3>
+        <p>Uma prescrição indica 5 mg por kg. A criança tem 20 kg.</p>
+        <p class="work">5 × 20 = <b>100 mg</b></p>
+        <p class="src">Exemplo de cálculo. Na vida real, o profissional segue sempre a prescrição.</p>
+      </article>
+    </div>
+    <p style="margin-top:1rem">Também aparece em programação, finanças, esporte, design, indústria e comércio. Quem entende os números tem mais escolhas.</p>
+  </section>
+
+  <section id="simuladores">
+    <h2>Faça as contas você mesmo</h2>
+    <p>Troque os valores e veja o resultado na hora.</p>
+
+    <div class="tool" id="t1">
+      <h3>Parcelar custa quanto a mais?</h3>
+      <div class="fields">
+        <label>Preço à vista (R$)<input type="text" inputmode="decimal" id="p-vista" value="1200"></label>
+        <label>Número de parcelas<input type="text" inputmode="numeric" id="p-n" value="10"></label>
+        <label>Valor de cada parcela (R$)<input type="text" inputmode="decimal" id="p-parc" value="150"></label>
+      </div>
+      <div class="result" id="p-out" aria-live="polite"></div>
+    </div>
+
+    <div class="tool" id="t2">
+      <h3>Juros simples e juros compostos</h3>
+      <div class="fields">
+        <label>Valor inicial (R$)<input type="text" inputmode="decimal" id="j-c" value="1000"></label>
+        <label>Taxa por mês (%)<input type="text" inputmode="decimal" id="j-i" value="2"></label>
+        <label>Meses<input type="text" inputmode="numeric" id="j-n" value="12"></label>
+      </div>
+      <div class="result" id="j-out" aria-live="polite"></div>
+      <p class="src" style="margin-top:.7rem">Simples: M = C × (1 + i × n). Compostos: M = C × (1 + i)<sup>n</sup>. Em que C é o valor inicial, i é a taxa em decimal (2% = 0,02) e n é o número de meses. Nos compostos, o juro de cada mês entra na base do mês seguinte: é juros sobre juros.</p>
+    </div>
+  </section>
+
+  <section id="atualidades">
+    <h2>Atualidades e curiosidades</h2>
+    <div class="grid">
+      <article class="card fact">
+        <h3>Matemática no Provão Paulista</h3>
+        <p>O Provão Paulista dá acesso a vagas na USP, Unicamp, Unesp, Fatecs e Univesp. Em 2026, foram 15.819 vagas para ingresso em 2027. No segundo dia da 3ª série, a prova cobrou Matemática e Ciências Humanas.</p>
+        <small>Fonte: Agência SP e USP, notícias de novembro de 2026.</small>
+      </article>
+      <article class="card fact">
+        <h3>OBMEP bateu recorde</h3>
+        <p>Em 2025, a Olimpíada Brasileira de Matemática das Escolas Públicas e Privadas registrou recorde de inscritos. Cada vez mais gente estuda matemática por escolha.</p>
+        <small>Fonte: Correio Braziliense, maio de 2026.</small>
+      </article>
+      <article class="card fact">
+        <h3>Khan Academy no Ensino Médio</h3>
+        <p>A plataforma oferece videoaulas, exercícios e acompanhamento do seu desempenho em matemática. Dá para estudar no seu ritmo.</p>
+        <small>Fonte: Seduc-SP, lista de plataformas digitais.</small>
+      </article>
+      <article class="card fact">
+        <h3>O CPF tem uma conta escondida</h3>
+        <p>Os dois últimos números do CPF são calculados a partir dos outros nove. É assim que o sistema percebe quando alguém digita um CPF errado.</p>
+      </article>
+      <article class="card fact">
+        <h3>O GPS faz contas de distância</h3>
+        <p>O aplicativo de mapas descobre onde você está medindo a distância até vários satélites ao mesmo tempo.</p>
+      </article>
+      <article class="card fact">
+        <h3>Dia do Pi e Dia da Matemática</h3>
+        <p>14 de março (3/14) é o Dia do Pi, porque π vale aproximadamente 3,14. O Dia Nacional da Matemática no Brasil é 6 de maio.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="estudo">
+    <h2>Como estudar matemática</h2>
+    <p>Marque o que você já faz. O objetivo é marcar todos.</p>
+    <ul class="check" id="dicas">
+      <li><label><input type="checkbox"><span><b>Estude um pouco todo dia.</b> Revisar em vários dias fixa mais do que estudar tudo de uma vez.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Resolva no papel, sem olhar a resposta.</b> Só confira depois de tentar.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Trate o erro como pista.</b> Refaça a questão errada e descubra em que passo você se perdeu.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Explique em voz alta.</b> Se você consegue explicar para um colega, você entendeu.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Na Khan Academy, assista e depois pratique.</b> Os exercícios mostram o que ainda falta.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Anote suas dúvidas.</b> Leve para o professor na próxima aula.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Durma bem antes de avaliações.</b> Cansado, o cérebro erra conta fácil.</span></label></li>
+    </ul>
+    <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+    <p id="prog" aria-live="polite" style="margin-top:.5rem">Você marcou 0 de 7.</p>
+  </section>
+
+  <section id="videos">
+    <h2>Vídeos para assistir</h2>
+    <p>Procure vídeos de até 10 minutos. Os botões abrem a busca no YouTube já com o assunto.</p>
+    <div class="grid" id="vgrid"></div>
+  </section>
+
+  <section id="quiz">
+    <h2>Teste rápido</h2>
+    <p>Três questões, usando o que você viu aqui. Papel e lápis ajudam.</p>
+    <div id="quizbox"></div>
+  </section>
+
+  <div class="aviso" role="note" style="margin-top:3.2rem">
+    <h2>Lembrete final</h2>
+    <p>Khan Academy e tarefa valem para a <b>média do 4º bimestre</b>. Quem faz, soma. Quem não faz, perde.</p>
+    <div class="btns">
+      <a class="btn" href="https://pt.khanacademy.org/" target="_blank" rel="noopener">Abrir a Khan Academy</a>
+      <a class="btn" href="https://saladofuturo.educacao.sp.gov.br/" target="_blank" rel="noopener">Abrir a Sala do Futuro</a>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>Professor Thiago</b><br>E.E. Moacyr Amaral<br>Orientação de Estudos de Matemática, 3º ano</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var brl = function(n){ return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); };
+  var pct = function(n){ return n.toLocaleString('pt-BR',{maximumFractionDigits:1}); };
+  var num = function(id){ return parseFloat(String(document.getElementById(id).value).replace(',','.')); };
+
+  // Navegação
+  document.querySelectorAll('[data-go]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el = document.getElementById(b.getAttribute('data-go'));
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  // Parcelamento
+  function parcelar(){
+    var v=num('p-vista'), n=num('p-n'), p=num('p-parc'), out=document.getElementById('p-out');
+    if(!(v>0) || !(n>=1) || !(p>0) || Math.floor(n)!==n){
+      out.innerHTML='<span class="error">Preencha os três campos com números maiores que zero. O número de parcelas deve ser inteiro.</span>';
+      return;
+    }
+    var total=n*p, extra=total-v, r=extra/v*100;
+    if(Math.abs(extra)<0.005){
+      out.innerHTML='Total parcelado: <b>'+brl(total)+'</b>. Sem acréscimo: é igual ao preço à vista.';
+    } else if(extra<0){
+      out.innerHTML='<span class="error">O total parcelado ('+brl(total)+') ficou menor que o à vista. Confira os valores.</span>';
+    } else {
+      out.innerHTML='Total parcelado: <b>'+brl(total)+'</b>.<br>Você paga <b>'+brl(extra)+'</b> a mais, que é <b>'+pct(r)+'%</b> sobre o preço à vista.';
+    }
+  }
+  ['p-vista','p-n','p-parc'].forEach(function(id){ document.getElementById(id).addEventListener('input',parcelar); });
+  parcelar();
+
+  // Juros
+  function juros(){
+    var c=num('j-c'), i=num('j-i'), n=num('j-n'), out=document.getElementById('j-out');
+    if(!(c>0) || !(i>=0) || !(n>=1) || Math.floor(n)!==n || n>600){
+      out.innerHTML='<span class="error">Use valor inicial maior que zero, taxa de 0 ou mais e meses inteiros entre 1 e 600.</span>';
+      return;
+    }
+    var d=i/100, ms=c*(1+d*n), mc=c*Math.pow(1+d,n);
+    out.innerHTML='Juros simples: <b>'+brl(ms)+'</b><br>Juros compostos: <b>'+brl(mc)+'</b><br>Diferença: <b>'+brl(mc-ms)+'</b> a mais nos compostos.';
+  }
+  ['j-c','j-i','j-n'].forEach(function(id){ document.getElementById(id).addEventListener('input',juros); });
+  juros();
+
+  // Checklist
+  var boxes=document.querySelectorAll('#dicas input');
+  function prog(){
+    var k=0; boxes.forEach(function(b){ if(b.checked) k++; });
+    document.getElementById('bar').style.width=(k/boxes.length*100)+'%';
+    document.getElementById('prog').textContent='Você marcou '+k+' de '+boxes.length+'.'+(k===boxes.length?' Estudo em dia!':'');
+  }
+  boxes.forEach(function(b){ b.addEventListener('change',prog); });
+
+  // Vídeos (busca no YouTube)
+  var vids=[
+    ['Para que serve a matemática','para que serve a matemática na vida e no trabalho'],
+    ['Porcentagem do zero','porcentagem matemática básica aula'],
+    ['Juros simples e compostos','juros simples e juros compostos aula matemática financeira'],
+    ['Canal Marcos Aba','Marcos Aba matemática'],
+    ['Canal Ferretto Matemática','Ferretto Matemática']
+  ];
+  var vg=document.getElementById('vgrid');
+  vids.forEach(function(v){
+    var a=document.createElement('a');
+    a.className='card';
+    a.style.textDecoration='none'; a.style.color='inherit';
+    a.href='https://www.youtube.com/results?search_query='+encodeURIComponent(v[1]);
+    a.target='_blank'; a.rel='noopener';
+    a.innerHTML='<h3></h3><p style="margin:0;color:var(--muted)">Buscar no YouTube</p>';
+    a.querySelector('h3').textContent=v[0];
+    vg.appendChild(a);
+  });
+
+  // Quiz
+  var Q=[
+    {t:'Uma camisa custa R$ 80,00 e tem 25% de desconto. Qual é o preço final?',
+     o:['R$ 55,00','R$ 60,00','R$ 20,00','R$ 100,00'],c:1,
+     w:'25% de 80 = 0,25 × 80 = 20. Depois, 80 − 20 = 60. Quem respondeu R$ 55 subtraiu 25 reais, mas 25% não são 25 reais. R$ 20 é só o desconto.'},
+    {t:'Você ganhou R$ 1.800,00 e sobraram R$ 450,00. Quantos por cento do salário sobraram?',
+     o:['10%','25%','45%','50%'],c:1,
+     w:'450 ÷ 1.800 = 0,25, que é 25%. Prova: 25% de 1.800 = 0,25 × 1.800 = 450.'},
+    {t:'R$ 1.000,00 rendem 2% ao mês, juros compostos. Qual é o valor depois de 2 meses?',
+     o:['R$ 1.040,00','R$ 1.040,40','R$ 1.020,00','R$ 1.400,00'],c:1,
+     w:'1.000 × 1,02 = 1.020. Depois, 1.020 × 1,02 = 1.040,40. Em juros simples seria R$ 1.040,00; nos compostos o juro do 2º mês incide sobre R$ 1.020.'}
+  ];
+  var box=document.getElementById('quizbox'), score=0, done=0;
+  Q.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='card q';
+    var h=document.createElement('h3'); h.textContent=(qi+1)+'. '+q.t; d.appendChild(h);
+    var os=document.createElement('div'); os.className='opts'; d.appendChild(os);
+    var why=document.createElement('p'); why.className='why'; why.setAttribute('aria-live','polite'); d.appendChild(why);
+    q.o.forEach(function(txt,oi){
+      var b=document.createElement('button'); b.type='button'; b.className='opt'; b.textContent=txt;
+      b.addEventListener('click',function(){
+        var all=os.querySelectorAll('button');
+        all.forEach(function(x,xi){ x.disabled=true; if(xi===q.c) x.classList.add('right'); });
+        if(oi===q.c){ score++; why.innerHTML='<b>Certo.</b> '; } else { b.classList.add('wrong'); why.innerHTML='<b>Não foi dessa vez.</b> '; }
+        why.appendChild(document.createTextNode(q.w));
+        done++;
+        if(done===Q.length){
+          var r=document.getElementById('final');
+          r.textContent='Você acertou '+score+' de '+Q.length+'.'+(score===Q.length?' Muito bem!':' Revise as explicações e tente de novo recarregando a página.');
+        }
+      });
+      os.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+  var f=document.createElement('p'); f.id='final'; f.setAttribute('aria-live','polite'); f.style.fontWeight='700'; f.style.marginTop='1rem';
+  box.appendChild(f);
+})();
+</script>
+</body>
+</html>
